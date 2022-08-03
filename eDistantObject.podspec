@@ -11,7 +11,8 @@ Pod::Spec.new do |s|
   s.license = { :type => "Apache 2.0", :file => "LICENSE" }
   s.source = { :git => "https://github.com/google/eDistantObject.git", :tag => "1.0.1" }
 
-  s.public_header_files = %w[Service/Sources/EDOClientService.h
+  s.public_header_files = %w[Channel/Sources/EDOHostPort.h,
+                             Service/Sources/EDOClientService.h
                              Service/Sources/EDOClientServiceStatsCollector.h
                              Service/Sources/EDOHostNamingService.h
                              Service/Sources/EDOHostService.h

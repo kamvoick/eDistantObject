@@ -81,13 +81,13 @@ typedef NS_ENUM(int, EDOBlockFieldDescriptors) {
 
 /* Get @c NSBlock class. */
 static Class GetBlockBaseClass() {
-  static Class blockClass;
+  static Class NSBlock;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    blockClass = NSClassFromString(@"NSBlock");
-    NSCAssert(blockClass, @"Couldn't load NSBlock class.");
+    NSBlock = NSClassFromString(@"NSBlock");
+    NSCAssert(NSBlock, @"Couldn't load NSBlock class.");
   });
-  return blockClass;
+  return NSBlock;
 }
 
 /** Check if the @c block has struct returns. */
@@ -109,10 +109,10 @@ static BOOL HasStructReturnForBlock(id block) {
 
   // We use runtime primitive APIs to go through the class hierarchy in case any subclass to
   // override -[isKindOfClass:] and cause unintended behaviours, i.e. OCMock.
-  Class blockClass = GetBlockBaseClass();
+  Class NSBlock = GetBlockBaseClass();
   Class objClass = object_getClass(object);
   while (objClass) {
-    if (objClass == blockClass) {
+    if (objClass == NSBlock) {
       return YES;
     }
     objClass = class_getSuperclass(objClass);
